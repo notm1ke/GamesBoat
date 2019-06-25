@@ -1,0 +1,8 @@
+.idea/
+.gradle/
+gradle/
+build/
+.floo
+.flooignore
+gradlew
+gradlew.bat

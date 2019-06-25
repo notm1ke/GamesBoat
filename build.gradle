@@ -1,0 +1,51 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        name 'jitpack'
+        url 'https://jitpack.io'
+    }
+    maven {
+        url 'https://m1ke.co/gradle/repo'
+    }
+}
+
+dependencies {
+    compile('net.dv8tion:JDA:3.8.1_450')
+    compile('com.jagrosh:jda-utilities:2.1')
+    compile('com.vdurmont:emoji-java:4.0.0')
+
+    compile('co.m1ke:basic:0.3')
+
+    compile('com.google.guava:guava:23.5-jre')
+    compile('com.google.code.gson:gson:2.8.2')
+    compile('com.googlecode.json-simple:json-simple:1.1.1')
+
+    compile('org.reflections:reflections:0.9.11')
+    compile('org.json:json:20180130')
+
+    compile('org.apache.commons:commons-lang3:3.4')
+    compile('commons-codec:commons-codec:1.11')
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'club.argon.prototype.GamesBoat'
+    }
+}

@@ -32,6 +32,9 @@ public class EmojiSelector extends ListenerAdapter {
     public static void addEmojiSelection(String author, EmojiSelection select) {
         if (select.getMessage().isFromType(ChannelType.PRIVATE) || select.getGuild().getSelfMember().hasPermission((Channel) select.getChannel(), Permission.MESSAGE_ADD_REACTION)) {
             for (String em : select.getOption()) {
+                if (select.getMessage() == null) {
+                    continue;
+                }
                 select.getMessage().addReaction(em).queue();
             }
             emojiSelector.put(author, select);

@@ -6,3 +6,4 @@ build/
 .flooignore
 gradlew
 gradlew.bat
+.DS_Store

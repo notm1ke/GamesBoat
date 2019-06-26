@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 clear
+echo '[36mGamesBoat version 0.1[0m'
 echo 'Building GamesBoat..'
 ./gradlew shadowJar
 echo 'Finished building GamesBoat'
 cd dist/
+mv GamesBoat-1.0-SNAPSHOT-all.jar GamesBoat-1.0-SNAPSHOT.jar
 echo 'Running GamesBoat'
-java -jar GamesBoat-1.0-SNAPSHOT-all.jar
+java -jar GamesBoat-1.0-SNAPSHOT.jar

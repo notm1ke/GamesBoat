@@ -17,7 +17,23 @@ you may once again start up the bot using the below command.
 java -jar GamesBoat-1.0-SNAPSHOT.jar
 ```
 
+## Building from source
+
+```sh
+All you need to do in order to build a jar from source, is either to use our compile script or use gradle.
+
+Compile Tool (only for macOS + Linux):
+./compile
+
+Gradle CLI (macOS + Linux):
+./gradlew shadowJar
+
+Gradle CLI (Windows):
+gradlew.bat shadowJar
+```
+
 ## Configuration
+
 ```sh
 token:        The secret token used to authorize the bot with Discord.
 status:       The status of the Bot (ONLINE, INVISIBLE, OFFLINE, IDLE, DO_NOT_DISTURB)
@@ -25,18 +41,16 @@ botGame: {
     type: 0 -> 2; DEFAULT, STREAMING, LISTENING (in that order)
     name: The textual representation of what the bot is doing (Playing ...)
 }
-storageType:  The type of storage system you would like to use (FLAT_FILE/MYSQL)
+storageType:  The storage system you would like to use (FLAT_FILE/MYSQL)
 
-// All of the next section pertains to if you are using MySQL/MariaDB
 sql: {
     database: The database which should contain all data in.
     host:     The hostname or IP of the target database server.
     port:     The port that the database is running on.
     user:     The user to login to the database as.
-    password: The password to use to log in to the database server.
+    password: The password to use when logging to the database server.
 }
 
-// All of the next section pertains to if you are using Flat File
 flatFile: {
     dataRoot: The root directory for the data to be stored in.
 }
@@ -49,6 +63,7 @@ wordListPath: The path to the JSON file containing all words used for Hangman.
 ## Authors
 
 👤 [@notm1ke](https://github.com/notm1ke), [@Struck713](https://github.com/struck713), and [@EyeAmfour](https://github.com/EyeAmfour)
+> Please note that I, notm1ke, am solely maintaining this repository, however, all of us are collectively programming the bot using a live collaboration plugin. Therefore, I commit and push our code at the end of each programming session.
 
 ## Show your support
 

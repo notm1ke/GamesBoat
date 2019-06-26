@@ -1,7 +1,6 @@
 package club.argon.gamesboat;
 
 import club.argon.gamesboat.game.GameManager;
-import club.argon.gamesboat.scheduler.SimpleRunnableImpl;
 import club.argon.gamesboat.storage.Preferences;
 import club.argon.gamesboat.util.emote.selection.emoji.EmojiSelector;
 
@@ -14,7 +13,6 @@ import co.m1ke.basic.utils.timings.Timings;
 
 import java.io.File;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import com.jagrosh.jdautilities.command.CommandClient;
 import com.jagrosh.jdautilities.command.CommandClientBuilder;
@@ -43,6 +41,18 @@ public class Base {
         try {
             Timings timings = new Timings("GamesBoat", "<init>");
             this.logger = new Logger("GamesBoat");
+
+            logger.raw(Lang.CYAN + "\n\t ██████╗  █████╗ ███╗   ███╗███████╗███████╗██████╗  ██████╗  █████╗ ████████╗\n" +
+                    "\t██╔════╝ ██╔══██╗████╗ ████║██╔════╝██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝\n" +
+                    "\t██║  ███╗███████║██╔████╔██║█████╗  ███████╗██████╔╝██║   ██║███████║   ██║   \n" +
+                    "\t██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  ╚════██║██╔══██╗██║   ██║██╔══██║   ██║   \n" +
+                    "\t╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗███████║██████╔╝╚██████╔╝██║  ██║   ██║   \n" +
+                    "\t ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝   ╚═╝   \n" +
+                    "                                                                              " + Lang.RESET);
+            logger.raw("\t\t      Booting " + Lang.CYAN + "GamesBoat" + Lang.RESET + " version " + Lang.WHITE + "#6/master (snapshot)" + Lang.RESET);
+            logger.raw("\t\t\t      Made with " + Lang.RED + "<3" + Lang.RESET + " the Argon Team.");
+            logger.raw("");
+
             preferences = new Preferences(new File("preferences.json"));
 
             this.waiter = new EventWaiter();
@@ -53,22 +63,17 @@ public class Base {
                     .setGame(preferences.getBotGame())
                     .build();
             jda = new JDABuilder()
-                    .setToken(preferences.getToken()) // move this to preferences file before we open source it
+                    .setToken(preferences.getToken())
                     .setStatus(OnlineStatus.ONLINE)
                     .setGame(Game.playing("loading up.."))
                     .addEventListener(waiter, client, new EmojiSelector())
-                    .buildAsync();
+                    .buildAsync()
+                    .awaitReady();
+
             scheduler = new SimpleScheduler();
             eventManager = new EventManager(true);
             listenerAdapter = new ListenerAdapter();
-
-            // Delay task in order to allow JDA time to connect.
-            scheduler.scheduleDelayedTask(new SimpleRunnableImpl() {
-                @Override
-                public void run() {
-                    gameManager = new GameManager(jda, client, waiter);
-                }
-            }, 1500L, TimeUnit.MILLISECONDS);
+            gameManager = new GameManager(jda, client, waiter);
 
             timings.complete("Initialization took %c%tms" + Lang.RESET + ".");
         } catch (Exception e) {

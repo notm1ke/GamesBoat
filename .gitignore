@@ -9,4 +9,3 @@ dist/
 .DS_Store
 gradlew
 gradlew.bat
-deploy.sh

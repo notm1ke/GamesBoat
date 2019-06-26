@@ -9,9 +9,11 @@ Please note that this README is still incomplete, and will be periodically updat
 
 ## Usage
 
-```sh
-First start up the bot using the following command. Doing this will force it to generate a preferences file that you may modify.
-This file will contain everything from database credentials to user storage types. Once the file is generated, and you have configured it to your liking,
+```
+First start up the bot using the following command.
+Doing this will force it to generate a preferences file that you may modify.
+This file will contain everything from database credentials to user storage types.
+Once the file is generated, and you have configured it to your liking,
 you may once again start up the bot using the below command.
 
 java -jar GamesBoat-1.0-SNAPSHOT.jar
@@ -19,10 +21,8 @@ java -jar GamesBoat-1.0-SNAPSHOT.jar
 
 ## Building from source
 
-```sh
-All you need to do in order to build a jar from source, is either to use our compile script or use gradle.
-
-Compile Tool (only for macOS + Linux):
+```
+Compile Tool (macOS + Linux):
 ./compile
 
 Gradle CLI (macOS + Linux):
@@ -34,12 +34,12 @@ gradlew.bat shadowJar
 
 ## Configuration
 
-```sh
+```
 token:        The secret token used to authorize the bot with Discord.
 status:       The status of the Bot (ONLINE, INVISIBLE, OFFLINE, IDLE, DO_NOT_DISTURB)
 botGame: {
-    type: 0 -> 2; DEFAULT, STREAMING, LISTENING (in that order)
-    name: The textual representation of what the bot is doing (Playing ...)
+    type:     0 -> 2 | DEFAULT, STREAMING, LISTENING (in that order)
+    name:     The textual representation of what the bot is doing (Playing ...)
 }
 storageType:  The storage system you would like to use (FLAT_FILE/MYSQL)
 
@@ -57,7 +57,6 @@ flatFile: {
 
 baseServer:   The Snowflake ID of the central server you want GamesBoat to run on.
 wordListPath: The path to the JSON file containing all words used for Hangman.
-
 ```
 
 ## Authors

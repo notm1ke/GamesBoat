@@ -2,6 +2,7 @@ package club.argon.gamesboat;
 
 import club.argon.gamesboat.game.GameManager;
 import club.argon.gamesboat.scheduler.SimpleRunnableImpl;
+import club.argon.gamesboat.storage.Preferences;
 import club.argon.gamesboat.util.emote.selection.emoji.EmojiSelector;
 
 import co.m1ke.basic.events.EventManager;
@@ -11,6 +12,7 @@ import co.m1ke.basic.scheduler.SimpleScheduler;
 import co.m1ke.basic.utils.Lang;
 import co.m1ke.basic.utils.timings.Timings;
 
+import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
@@ -30,6 +32,7 @@ public class Base {
     private EventWaiter waiter;
     private CommandClient client;
 
+    private static Preferences preferences;
     private static GameManager gameManager;
 
     private static SimpleScheduler scheduler;
@@ -40,16 +43,17 @@ public class Base {
         try {
             Timings timings = new Timings("GamesBoat", "<init>");
             this.logger = new Logger("GamesBoat");
+            preferences = new Preferences(new File("preferences.json"));
 
             this.waiter = new EventWaiter();
             this.client = new CommandClientBuilder()
-                    .setPrefix("!")
-                    .setOwnerId("177167251986841600")
+                    .setPrefix(preferences.getPrefix())
+                    .setOwnerId(preferences.getOwnerId())
                     .setScheduleExecutor(Executors.newScheduledThreadPool(50))
-                    .setGame(Game.playing("on Argon"))
+                    .setGame(preferences.getBotGame())
                     .build();
             jda = new JDABuilder()
-                    .setToken("NTkyNzYxODAyOTg3NjY3NDc2.XREChw.FS-m6CAq_l2axK_Pelxh1GMeKsc") // move this to preferences file before we open source it
+                    .setToken(preferences.getToken()) // move this to preferences file before we open source it
                     .setStatus(OnlineStatus.ONLINE)
                     .setGame(Game.playing("loading up.."))
                     .addEventListener(waiter, client, new EmojiSelector())
@@ -66,7 +70,7 @@ public class Base {
                 }
             }, 1500L, TimeUnit.MILLISECONDS);
 
-            timings.complete("Initialization task took %c%tms" + Lang.RESET + ".");
+            timings.complete("Initialization took %c%tms" + Lang.RESET + ".");
         } catch (Exception e) {
             logger.except(e, "Error starting up");
             e.printStackTrace();
@@ -75,6 +79,10 @@ public class Base {
 
     public static JDA getAPI() {
         return jda;
+    }
+
+    public static Preferences getPreferences() {
+        return preferences;
     }
 
     public static GameManager getGameManager() {

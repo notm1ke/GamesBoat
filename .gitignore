@@ -2,8 +2,11 @@
 .gradle/
 gradle/
 build/
+dist/
+
 .floo
 .flooignore
+.DS_Store
 gradlew
 gradlew.bat
-.DS_Store
+deploy.sh

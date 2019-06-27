@@ -32,7 +32,7 @@ configurations {
 
 dependencies {
     compile('net.dv8tion:JDA:3.8.1_450')
-    compile('com.jagrosh:jda-utilities:2.1')
+    compile('com.jagrosh:jda-utilities:2.1.5')
     compile('com.vdurmont:emoji-java:4.0.0')
 
     compile('co.m1ke:basic:0.3')
@@ -43,6 +43,7 @@ dependencies {
 
     compile('org.reflections:reflections:0.9.11')
     compile('org.json:json:20180130')
+    compile('org.slf4j:slf4j-simple:1.6.1')
 
     compile('org.apache.commons:commons-lang3:3.4')
     compile('commons-codec:commons-codec:1.11')

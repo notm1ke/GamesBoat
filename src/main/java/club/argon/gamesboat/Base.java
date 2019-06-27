@@ -1,5 +1,7 @@
 package club.argon.gamesboat;
 
+import club.argon.gamesboat.commands.terminal.StatusCommand;
+import club.argon.gamesboat.commands.terminal.StopCommand;
 import club.argon.gamesboat.game.GameManager;
 import club.argon.gamesboat.storage.Preferences;
 import club.argon.gamesboat.util.emote.selection.emoji.EmojiSelector;
@@ -8,6 +10,7 @@ import co.m1ke.basic.events.EventManager;
 import co.m1ke.basic.events.listener.ListenerAdapter;
 import co.m1ke.basic.logger.Logger;
 import co.m1ke.basic.scheduler.SimpleScheduler;
+import co.m1ke.basic.terminal.Terminal;
 import co.m1ke.basic.utils.Lang;
 import co.m1ke.basic.utils.timings.Timings;
 
@@ -24,6 +27,7 @@ import net.dv8tion.jda.core.entities.Game;
 
 public class Base {
 
+    private Application application;
     private Logger logger;
 
     private static JDA jda;
@@ -36,6 +40,10 @@ public class Base {
     private static SimpleScheduler scheduler;
     private static EventManager eventManager;
     private static ListenerAdapter listenerAdapter;
+
+    public Base(Application application) {
+        this.application = application;
+    }
 
     public void boot() {
         try {
@@ -74,6 +82,12 @@ public class Base {
             eventManager = new EventManager(true);
             listenerAdapter = new ListenerAdapter();
             gameManager = new GameManager(jda, client, waiter);
+
+            Terminal.initialize(application);
+
+            // Override default stop command in favor our custom one.
+            Terminal.getCommands().remove("stop");
+            Terminal.register(new StatusCommand(application, jda, gameManager), new StopCommand(application, jda));
 
             timings.complete("Initialization took %c%tms" + Lang.RESET + ".");
         } catch (Exception e) {

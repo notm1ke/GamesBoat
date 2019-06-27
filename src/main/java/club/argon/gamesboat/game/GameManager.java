@@ -8,6 +8,8 @@ import club.argon.gamesboat.game.lobby.GameLobby;
 import club.argon.gamesboat.game.lobby.GameLobbyType;
 
 import co.m1ke.basic.logger.Logger;
+import co.m1ke.basic.utils.Lang;
+import co.m1ke.basic.utils.timings.Timings;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,7 @@ public class GameManager {
     private EventWaiter eventWaiter;
 
     public GameManager(JDA discord, CommandClient commandClient, EventWaiter eventWaiter) {
+        Timings timings = new Timings("Games", "Initialization");
         this.logger = new Logger("Games");
         this.discord = discord;
         this.commandClient = commandClient;
@@ -45,7 +48,7 @@ public class GameManager {
         commandClient.addCommand(new GameCommand(this));
         discord.addEventListener(new GameListener(this));
 
-        logger.info("Game Manager is ready.");
+        timings.complete("Games Manager is now ready in %c%tms" + Lang.RESET + ".");
     }
 
     public void createLobby(User user, Game game, GameLobbyType type) {

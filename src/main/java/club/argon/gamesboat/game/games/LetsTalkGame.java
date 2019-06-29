@@ -16,12 +16,12 @@ import net.dv8tion.jda.core.events.Event;
  * This game will be removed before the final submission.
  * It is purely a test of the event system and game systems as a whole.
  */
-public class TestGame extends Game {
+public class LetsTalkGame extends Game {
 
-    public TestGame(GameManager manager) {
-        super("Test", "TS",
-                new GameMessage("*This game is a test*\nSay something to your teammate!",
-                        "Thanks for playing this test game!", "An error occurred, so the game was ended.", "There are not enough players to continue this game.",
+    public LetsTalkGame(GameManager manager) {
+        super("Lets Talk", "LT",
+                new GameMessage("Talk to a stranger.\nType something into this chat and your teammate will receive it.",
+                        "Thanks for playing this game!", "An error occurred, so the game was ended.", "There are not enough players to continue this game.",
                         "An error occurred that prevented the game from continuing.", GameMessage.GENERIC_PLAYER_JOIN, GameMessage.GENERIC_PLAYER_QUIT),
                 2, 2);
         this.setGameManager(manager);

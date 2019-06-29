@@ -21,6 +21,7 @@ public class GameCommand extends Command {
         this.manager = manager;
         this.name = "game";
         this.help = "there is no help";
+        this.guildOnly = false;
     }
 
     @Override

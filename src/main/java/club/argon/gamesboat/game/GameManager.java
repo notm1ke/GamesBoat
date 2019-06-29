@@ -2,8 +2,8 @@ package club.argon.gamesboat.game;
 
 import club.argon.gamesboat.commands.GameCommand;
 import club.argon.gamesboat.game.games.ConnectFourGame;
+import club.argon.gamesboat.game.games.LetsTalkGame;
 import club.argon.gamesboat.game.games.RockPaperScissors;
-import club.argon.gamesboat.game.games.TestGame;
 import club.argon.gamesboat.game.lobby.GameLobby;
 import club.argon.gamesboat.game.lobby.GameLobbyType;
 
@@ -38,7 +38,7 @@ public class GameManager {
 
         this.games = new ArrayList<Game>() {
             {
-                add(new TestGame(GameManager.this));
+                add(new LetsTalkGame(GameManager.this));
                 add(new ConnectFourGame(GameManager.this, eventWaiter));
                 add(new RockPaperScissors(GameManager.this));
             }

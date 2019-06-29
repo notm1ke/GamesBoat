@@ -26,10 +26,14 @@ public class GameListener extends ListenerAdapter {
         }
 
         if (event.getChannelType() == ChannelType.PRIVATE) {
+            if (event.getMessage().getContentRaw().startsWith("!")) {
+                // Rudimentary command detection
+                return;
+            }
             GameLobby lobby = gameManager.searchForUser(sender);
             if (lobby == null) {
                 event.getChannel().sendMessage(Embeds.of("Private Message", Embeds.Icons.ERROR.getUrl(), Embeds.ColorType.RED, new String[] {
-                        "Prototype will only use the private messaging channel when communicating with users who are active in games."
+                        "GamesBoat will only use the private messaging channel when communicating with users who are active in games."
                 })).queue();
                 return;
             }

@@ -59,6 +59,13 @@ baseServer:   The Snowflake ID of the central server you want GamesBoat to run o
 wordListPath: The path to the JSON file containing all words used for Hangman.
 ```
 
+## What we didn't finish
+> Although we were pretty ambitious about what we could do, not everything we planned came to be. Here is a list of unfinished stuff that never made it into the bot.
+- User System / Statistics
+- Leaderboards
+- Hangman Game
+- Text-based Paintball Game
+
 ## Authors
 
 👤 [@notm1ke](https://github.com/notm1ke), [@Struck713](https://github.com/struck713), and [@EyeAmfour](https://github.com/EyeAmfour)

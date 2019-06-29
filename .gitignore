@@ -7,5 +7,3 @@ dist/
 .floo
 .flooignore
 .DS_Store
-gradlew
-gradlew.bat

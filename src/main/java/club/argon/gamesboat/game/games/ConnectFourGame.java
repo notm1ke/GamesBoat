@@ -323,8 +323,6 @@ public class ConnectFourGame extends Game {
     }
 
     private boolean hasFour(GamePlayer player) {
-        // no gay algorithms allowed
-
         Piece[][] pieces = board.getPieces();
         GameColor color = player.getColor();
 
